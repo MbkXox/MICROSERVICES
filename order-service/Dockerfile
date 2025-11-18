@@ -31,10 +31,11 @@ ENV NODE_ENV=production
 ENV PORT=4000
 
 # IMPORTANT : chemin absoluté dans l'image
-ENV DATABASE_URL="file:/app/prisma/dev.db"
+ENV DATABASE_URL="file:/app/prisma/db/dev.db"
 ENV JWT_SECRET="change-me"
 
-RUN npx prisma migrate deploy
+# Créer le répertoire db avant d'exécuter les migrations
+RUN mkdir -p /app/prisma/db && npx prisma migrate deploy
 
 EXPOSE 4000
 
