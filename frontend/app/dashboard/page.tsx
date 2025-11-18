@@ -28,7 +28,7 @@ export default function Dashboard() {
       const res = await fetch('/api/orders')
       if (!res.ok) throw new Error('fetch failed')
       const data = await res.json()
-      setOrders(data)
+      setOrders(Array.isArray(data) ? data : [])
       setLoading(false)
     } catch {
       setError('Impossible de charger les commandes')
