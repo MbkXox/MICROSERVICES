@@ -25,7 +25,7 @@ Service d'authentification basé sur FastAPI pour les microservices.
 
 Lancez le serveur en mode développement :
 ```bash
-uvicorn main:app --reload -port 8000
+uvicorn main:app --reload --port 8000
 ```
 
 Le service sera accessible sur `http://localhost:8000`.
