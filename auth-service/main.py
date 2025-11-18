@@ -11,6 +11,7 @@ import os
 from db import init_db
 from auth import router as auth_router
 from jwks import router as jwks_router
+from health import router as health_router
 
 
 # ---------------------------------------------------------------------------
@@ -57,3 +58,6 @@ app.include_router(auth_router, prefix="/auth", tags=["auth"])
 
 # Endpoint JWKS (.well-known/jwks.json), utile pour la validation des clés JWT.
 app.include_router(jwks_router, tags=["jwks"])
+
+# Route de santé pour vérifier l'état du service
+app.include_router(health_router, tags=["health"])
