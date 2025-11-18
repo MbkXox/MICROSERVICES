@@ -1,22 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Frontend
 
-## Getting Started
+Interface utilisateur pour les microservices, basée sur Next.js.
 
-First, run the development server:
+## Prérequis
 
+- Node.js 18+
+- npm ou yarn
+
+## Installation
+
+1. Installez les dépendances :
+   ```bash
+   npm install
+   ```
+
+## Lancement
+
+Lancez le serveur de développement :
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+L'application sera accessible sur `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Fonctionnalités
+
+- Authentification utilisateur
+- Gestion des commandes
+- Interface responsive
+
+## Configuration
+
+Assurez-vous que les services backend (auth-service et order-service) sont en cours d'exécution pour une fonctionnalité complète.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
