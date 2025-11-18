@@ -16,7 +16,7 @@ async def health_check():
     Retourne le statut du service sans nécessiter d'authentification.
     """
     return {
-        "status": "healthy",
+        "status": "ok",
+        "service": "auth-service",
         "timestamp": datetime.utcnow().isoformat(),
-        "service": "auth-service"
     }
