@@ -22,7 +22,7 @@ SECRET_KEY = os.getenv("JWT_SECRET")
 
 # Algorithme cryptographique utilisé pour signer les tokens.
 # Typiquement HS256 (symétrique) ou RS256 (asymétrique si clés RSA).
-ALGORITHM = os.getenv("JWT_ALGO", "HS256")
+ALGORITHM = os.getenv("JWT_ALGO")
 
 # Durée d’expiration des tokens (en minutes)
 ACCESS_EXPIRE_MIN = int(os.getenv("ACCESS_TOKEN_EXPIRES_MIN", 60))
