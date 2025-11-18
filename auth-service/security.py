@@ -18,7 +18,7 @@ import os
 
 # Clé secrète pour signer les JWT (HS256)
 # En production : clé longue, aléatoire, jamais committée.
-SECRET_KEY = os.getenv("JWT_SECRET", "change-me")
+SECRET_KEY = os.getenv("JWT_SECRET")
 
 # Algorithme cryptographique utilisé pour signer les tokens.
 # Typiquement HS256 (symétrique) ou RS256 (asymétrique si clés RSA).
