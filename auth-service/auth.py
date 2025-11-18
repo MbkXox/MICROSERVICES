@@ -8,7 +8,7 @@ Routes d'authentification du service :
 from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlmodel import Session, select
 
-from models import User
+from models import User, RegisterRequest, LoginRequest, TokenResponse, MessageResponse, RefreshRequest, RefreshResponse
 from db import get_session
 from security import (
     create_token,
@@ -23,24 +23,14 @@ router = APIRouter()
 # ---------------------------------------------------------------------
 # 🟦 Register : création d’un utilisateur
 # ---------------------------------------------------------------------
-@router.post("/register")
-async def register(request: Request, session: Session = Depends(get_session)):
+@router.post("/register", response_model=MessageResponse)
+async def register(request: RegisterRequest, session: Session = Depends(get_session)):
     """
-    Création d'un utilisateur à partir d’un JSON :
-    {
-        "username": "john",
-        "password": "secret"
-    }
+    Création d'un utilisateur.
     """
 
-    # Récupération des données envoyées
-    data = await request.json()
-    username = data.get("username")
-    password = data.get("password")
-
-    # Vérification minimale
-    if not username or not password:
-        raise HTTPException(status_code=400, detail="Missing username or password")
+    username = request.username
+    password = request.password
 
     # Vérifie l'unicité du username
     existing = session.exec(
@@ -65,26 +55,14 @@ async def register(request: Request, session: Session = Depends(get_session)):
 # ---------------------------------------------------------------------
 # 🟦 Login : authentification + création des tokens
 # ---------------------------------------------------------------------
-@router.post("/login")
-async def login(request: Request, session: Session = Depends(get_session)):
+@router.post("/login", response_model=TokenResponse)
+async def login(request: LoginRequest, session: Session = Depends(get_session)):
     """
-    Authentifie un utilisateur via un JSON :
-    {
-        "username": "john",
-        "password": "secret"
-    }
-
-    Retourne :
-    - access_token   (valide 1h par défaut)
-    - refresh_token  (valide 30 jours par défaut)
+    Authentifie un utilisateur et retourne les tokens JWT.
     """
 
-    data = await request.json()
-    username = data.get("username")
-    password = data.get("password")
-
-    if not username or not password:
-        raise HTTPException(status_code=400, detail="Missing username or password")
+    username = request.username
+    password = request.password
 
     # Recherche de l'utilisateur
     user = session.exec(
@@ -110,21 +88,13 @@ async def login(request: Request, session: Session = Depends(get_session)):
 # ---------------------------------------------------------------------
 # 🟦 Refresh : renouvellement du token d'accès
 # ---------------------------------------------------------------------
-@router.post("/refresh")
-async def refresh(request: Request):
+@router.post("/refresh", response_model=RefreshResponse)
+async def refresh(request: RefreshRequest):
     """
     Échange un refresh token contre un nouvel access token.
-    Attend un JSON :
-    {
-        "refresh_token": "<token>"
-    }
     """
 
-    data = await request.json()
-    refresh_token = data.get("refresh_token")
-
-    if not refresh_token:
-        raise HTTPException(status_code=400, detail="Missing refresh_token")
+    refresh_token = request.refresh_token
 
     try:
         # Décodage du refresh token

@@ -18,7 +18,12 @@ from health import router as health_router
 # Application FastAPI
 # ---------------------------------------------------------------------------
 # Création de l'application avec un titre (visible dans /docs et /openapi.json).
-app = FastAPI(title="Auth Service")
+app = FastAPI(
+    title="Auth Service API",
+    description="API pour l'authentification des utilisateurs dans les microservices",
+    version="1.0.0",
+    docs_url="/",
+)
 
 
 # ---------------------------------------------------------------------------
