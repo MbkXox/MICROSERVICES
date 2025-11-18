@@ -6,7 +6,11 @@ de la base de données au démarrage.
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
 import os
+
+# Charger les variables d'environnement depuis .env
+load_dotenv()
 
 from db import init_db
 from auth import router as auth_router
