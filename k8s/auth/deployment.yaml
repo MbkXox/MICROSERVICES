@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-service
+  labels:
+    app: auth-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-service
+  template:
+    metadata:
+      labels:
+        app: auth-service
+    spec:
+      containers:
+        - name: auth-service
+          image: matismbk/auth-service:latest
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - name: auth-storage
+              mountPath: /data
+          env:
+            - name: DATABASE_URL
+              value: "sqlite:////data/auth.db"
+
+          # Vérifie régulièrement si le service fonctionne
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
+          # Vérifie si le service est prêt à recevoir du trafic
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+      volumes:
+        - name: auth-storage
+          persistentVolumeClaim:
+            claimName: auth-service-pvc
