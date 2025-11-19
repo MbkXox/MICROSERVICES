@@ -25,6 +25,7 @@ Service d'authentification basé sur FastAPI pour les microservices.
 
 Lancez le serveur en mode développement :
 ```bash
+.\.venv\Scripts\Activate.ps1
 uvicorn main:app --reload --port 8000
 ```
 

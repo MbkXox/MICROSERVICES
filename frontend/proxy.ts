@@ -3,9 +3,9 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 // Déclare explicitement quelles routes doivent passer par ce proxy.
-// Ici : toutes les routes de /dashboard et sous-routes.
+// Ici : toutes les routes de /backoffice et sous-routes.
 export const config = {
-  matcher: ['/dashboard/:path*'],
+  matcher: ['/backoffice/:path*'],
 }
 
 /**
