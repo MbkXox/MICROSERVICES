@@ -1,41 +1,43 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: order-service
+  name: tenor-service
   labels:
-    app: order-service
+    app: tenor-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: order-service
+      app: tenor-service
   template:
     metadata:
       labels:
-        app: order-service
+        app: tenor-service
     spec:
       containers:
-        - name: order-service
-          image: matismbk/order-service:latest
+        - name: tenor-service
+          image: matismbk/tenor-service:latest
           ports:
             - containerPort: 4000
           volumeMounts:
-            - name: order-storage
-              mountPath: /app/prisma/dev.db
+            - name: tenor-storage
+              mountPath: /app/prisma
 
           env:
             - name: DATABASE_URL
-              value: "file:/app/prisma/dev.db"
+              value: "file:/app/prisma/tenor.db"
             - name: JWT_SECRET
               value: "change-me"
+            - name: TENOR_API_KEY
+              value: "AIzaSyBYKuMBO020K_nsGkz7Kw-0IpG6C5UrGfY"
             - name: PORT
-              value: "4000"
+              value: "5000"
 
           # Vérifie si l'app répond
           livenessProbe:
             httpGet:
               path: /health
-              port: 4000
+              port: 5000
             initialDelaySeconds: 10
             periodSeconds: 10
 
@@ -43,10 +45,10 @@ spec:
           readinessProbe:
             httpGet:
               path: /health
-              port: 4000
+              port: 5000
             initialDelaySeconds: 5
             periodSeconds: 5
       volumes:
-        - name: order-storage
+        - name: tenor-storage
           persistentVolumeClaim:
-            claimName: order-service-pvc
+            claimName: tenor-service-pvc

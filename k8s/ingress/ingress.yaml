@@ -26,7 +26,16 @@ spec:
                 port:
                   number: 4000
 
-          # 3) Frontend : tout le reste → Next.js
+          # 3) Tenor-service : /gifs → NestJS
+          - path: /gifs
+            pathType: Prefix
+            backend:
+              service:
+                name: tenor-service
+                port:
+                  number: 5000
+
+          # 4) Frontend : tout le reste → Next.js
           - path: /
             pathType: Prefix
             backend:

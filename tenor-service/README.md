@@ -1,29 +1,69 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Tenor Service
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Micro-service NestJS pour la recherche et gestion de GIFs via l'API Tenor.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Fonctionnalités
 
-## Description
+- Recherche de GIFs via l'API Tenor
+- Gestion des favoris utilisateur
+- Authentification JWT
+- Base de données SQLite avec TypeORM
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Installation
+
+```bash
+npm install
+```
+
+## Configuration
+
+Créer un fichier `.env` basé sur `.env.example` :
+
+```env
+DATABASE_URL=tenor.db
+JWT_SECRET=change-me
+TENOR_API_KEY=votre-cle-api-tenor
+PORT=5000
+```
+
+Obtenir une clé API gratuite sur [Tenor Developers](https://developers.google.com/tenor/guides/quickstart).
+
+## Démarrage
+
+```bash
+# Développement
+npm run start:dev
+
+# Production
+npm run start:prod
+```
+
+## API Endpoints
+
+### Recherche de GIFs
+- `GET /gifs/search?q=query` - Recherche de GIFs
+
+### Favoris
+- `GET /gifs/favorites` - Liste des favoris
+- `POST /gifs/favorites` - Ajouter un favori
+- `DELETE /gifs/favorites/:id` - Supprimer un favori
+
+Tous les endpoints nécessitent un token JWT dans l'header `Authorization: Bearer <token>`.
+
+## Documentation API
+
+Accessible sur `/api` en mode développement.
+
+## Docker
+
+```bash
+docker build -t tenor-service .
+docker run -p 5000:5000 tenor-service
+```
+
+## Kubernetes
+
+Utiliser les manifests dans `../k8s/tenor/`.
 
 ## Project setup
 

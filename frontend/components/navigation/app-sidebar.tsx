@@ -6,6 +6,7 @@ import {
   LayoutDashboard,
   Package,
   CircuitBoard,
+  Image,
 } from "lucide-react"
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from "@/components/ui/sidebar"
 import { TeamSwitcher } from "./team-switcher"
@@ -37,6 +38,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         title: "Commandes",
         url: "/backoffice/orders",
         icon: Package,
+      },
+      {
+        title: "GIFs",
+        url: "/backoffice/gifs",
+        icon: Image,
       },
     ]
   }

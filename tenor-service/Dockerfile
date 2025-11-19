@@ -34,7 +34,7 @@ ENV NODE_ENV=production
 ENV PORT=4000
 
 # Base de données dans /app/data au lieu de /app/prisma
-ENV DATABASE_URL="file:/app/data/dev.db"
+ENV DATABASE_URL="file:/app/data/tenor.db"
 ENV JWT_SECRET="change-me"
 
 EXPOSE 4000

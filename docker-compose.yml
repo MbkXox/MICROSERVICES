@@ -20,7 +20,21 @@ services:
     env_file:
       - ./order-service/.env
     volumes:
-      - order_db_data:/app/prisma/db
+      - order_db_data:/app/prisma
+    depends_on:
+      - auth-service
+    restart: unless-stopped
+
+  tenor-service:
+    build:
+      context: ./tenor-service
+    container_name: tenor-service
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./tenor-service/.env
+    volumes:
+      - tenor_db_data:/app/prisma
     depends_on:
       - auth-service
     restart: unless-stopped
@@ -41,4 +55,5 @@ services:
 volumes:
   auth_db_data:
   order_db_data:
+  tenor_db_data:
 
