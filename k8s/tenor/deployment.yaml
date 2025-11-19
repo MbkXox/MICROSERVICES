@@ -29,7 +29,7 @@ spec:
             - name: JWT_SECRET
               value: "change-me"
             - name: TENOR_API_KEY
-              value: "AIzaSyBYKuMBO020K_nsGkz7Kw-0IpG6C5UrGfY"
+              value: "API TOKEN"
             - name: PORT
               value: "5000"
 
